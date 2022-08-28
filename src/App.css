@@ -1,0 +1,27 @@
+.App {
+  text-align: center;
+}
+
+.homepageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.homepageContainer .homepage {
+  width: 60%;
+}
+
+.homepageContainer .homepage .buttonDiv button {
+  margin-right: 5px;
+}
+
+.imageGeneratorContainer {
+  margin-top: 80px
+}
+
+.imageGeneratorContainer .imageGenerator {
+  width: 80%
+}
