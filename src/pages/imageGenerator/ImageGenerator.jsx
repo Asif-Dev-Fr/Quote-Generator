@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { getImage } from "../../api/api";
+import Image from "../../components/Image";
 
 const ImageGenerator = () => {
   const [input, setInput] = useState("");
+  const [singleImage, setSingleImage] = useState(null);
+  const [arrayImage, setArrayImage] = useState([]);
 
   // Methods
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    let request = await getImage(input);
+    console.log(request);
+    if (request) setArrayImage(request.hits);
   };
 
   return (
@@ -32,6 +39,12 @@ const ImageGenerator = () => {
             </Button>
           </div>
         </Form>
+
+        <div className="imageContainer">
+          {arrayImage.map((value, key) => (
+            <Image image={value} imageKey={key} />
+          ))}
+        </div>
       </div>
     </div>
   );

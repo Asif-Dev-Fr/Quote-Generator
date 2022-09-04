@@ -19,9 +19,28 @@
 }
 
 .imageGeneratorContainer {
-  margin-top: 80px
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .imageGeneratorContainer .imageGenerator {
-  width: 80%
+  width: 80%;
+}
+
+.imageGeneratorContainer .imageGenerator .buttonDiv button {
+  margin-left: 5px;
+}
+
+.imageGeneratorContainer .imageGenerator .imageContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.imageGeneratorContainer .imageGenerator .imageContainer .image {
+  width: 150px;
+  height: 150px;
+  margin: 10px;
 }
