@@ -10,6 +10,7 @@ import Homepage from "./pages/homepage/Homepage";
 import ImageGenerator from "./pages/imageGenerator/ImageGenerator";
 import { ProtectedRoute } from "./components/ProtectedRoutes";
 import NavComponent from "./components/NavComponent";
+import Login from "./pages/Login/Login";
 
 
 function App() {
@@ -40,18 +41,18 @@ function App() {
             path="/"
             element={
               isLogged ? (
-                <Navigate to={"/imageGenerator"} />
+                <Navigate to={"/homepage"} />
               ) : (
-                <Homepage handleLogin={handleLogin} />
+                <Login handleLogin={handleLogin} />
               )
             }
           />
 
           <Route
-            path="/imageGenerator"
+            path="/homepage"
             element={
               <ProtectedRoute isLogged={isLogged}>
-                <ImageGenerator />
+                <Homepage />
               </ProtectedRoute>
             }
           />

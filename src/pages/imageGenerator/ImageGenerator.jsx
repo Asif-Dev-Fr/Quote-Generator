@@ -42,7 +42,7 @@ const ImageGenerator = () => {
 
         <div className="imageContainer">
           {arrayImage.map((value, key) => (
-            <Image image={value} imageKey={key} />
+            <Image image={value} key={key} />
           ))}
         </div>
       </div>
