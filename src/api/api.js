@@ -1,3 +1,5 @@
+import * as QuoteData from "../assets/data/quotesBackUp.json"
+
 export const getImage = async (input) => {
   if (input) {
     let words = input.trim().split(" ");
@@ -32,7 +34,7 @@ export const getQuote = async () => {
   try {
     const response = await fetch(process.env.REACT_APP_QUOTE_API_URL);
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
     if(data) return data
   } catch (e) {
     console.error(e)
