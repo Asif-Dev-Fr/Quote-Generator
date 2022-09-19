@@ -44,3 +44,11 @@
   height: 150px;
   margin: 10px;
 }
+
+.homepageInput {
+  margin-top: 200px;
+}
+
+.homepageInput button {
+  margin-top: 20px;
+}

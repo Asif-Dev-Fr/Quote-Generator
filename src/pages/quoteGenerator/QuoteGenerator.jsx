@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { getQuote } from "../../api/api";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 
-const QuoteGenerator = () => {
-  const [quoteNumber, setQuoteNumber] = useState(0);
+const QuoteGenerator = ({ input }) => {
   const [quotesArray, setQuotesArray] = useState([]);
-  const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [quoteNumber, setQuoteNumber] = useState(0);
 
   // Methods :
   const findQuote = async () => {
     let response = await getQuote();
+    console.log(input, "i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", !!response, !!input)
     let tmpArray = [];
     if (response && input) {
+      console.log("first")
       setLoading(true);
       let capitalize = input.charAt(0).toUpperCase() + input.slice(1);
       console.log(capitalize);
@@ -28,7 +28,7 @@ const QuoteGenerator = () => {
 
   useEffect(() => {
     findQuote();
-  }, [input]);
+  }, []);
 
   const precedentQuote = () => {
     if (quoteNumber !== 0) {
@@ -49,36 +49,8 @@ const QuoteGenerator = () => {
 
   return (
     <div className="mt-5 mb-3">
-      <h3> Generate a quote with the following word </h3>
-      <Form className="row justify-content-center row-column">
-        <Form.Group
-          className="mb-3 col-lg-10 col-12"
-          controlId="formBasicEmail"
-        >
-          <Form.Control
-            type="text"
-            placeholder="Search"
-            name="search"
-            onChange={(e) => setInput(e.target.value.trim().toLowerCase())}
-          />
-        </Form.Group>
-        <Button
-          className="mb-3 col-lg-9 col-12"
-          onClick={precedentQuote}
-          disabled={quoteNumber === 0}
-          variant={"danger"}
-        >
-          Precedent
-        </Button>
-        <Button
-          className="mb-3 col-lg-9 col-12"
-          onClick={nextQuote}
-          disabled={quoteNumber + 1 === quotesArray.length}
-          variant={"success"}
-        >
-          Next
-        </Button>
-      </Form>
+      <h3> Choose your quote </h3>
+
       {!loading && input && (
         <div>
           <p>
@@ -93,6 +65,22 @@ const QuoteGenerator = () => {
           </p>
         </div>
       )}
+      <Button
+        className="mb-3 col-lg-9 col-12"
+        onClick={precedentQuote}
+        disabled={quoteNumber === 0}
+        variant={"danger"}
+      >
+        Precedent
+      </Button>
+      <Button
+        className="mb-3 col-lg-9 col-12"
+        onClick={nextQuote}
+        disabled={quoteNumber + 1 === quotesArray.length}
+        variant={"success"}
+      >
+        Next
+      </Button>
     </div>
   );
 };
