@@ -2,6 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 
 const NavComponent = ({ isLogged, checkLoginStatus }) => {
   // Methods :
@@ -13,7 +14,11 @@ const NavComponent = ({ isLogged, checkLoginStatus }) => {
   return (
     <Navbar bg="dark" expand="lg" variant="dark">
       <Container>
-        <Navbar.Brand>Quote Generator</Navbar.Brand>
+        <Navbar.Brand>
+          <Link to="/" style={{ textDecoration: "none", color: "#FFF" }}>
+            Quote Generator
+          </Link>
+        </Navbar.Brand>
 
         {isLogged && (
           <>

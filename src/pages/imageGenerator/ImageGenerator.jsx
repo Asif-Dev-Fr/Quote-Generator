@@ -1,45 +1,26 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { useEffect } from "react";
 import { getImage } from "../../api/api";
 import Image from "../../components/Image";
 
-const ImageGenerator = () => {
-  const [input, setInput] = useState("");
+const ImageGenerator = ({ input }) => {
   const [singleImage, setSingleImage] = useState(null);
   const [arrayImage, setArrayImage] = useState([]);
 
   // Methods
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const fetchImage = async () => {
     let request = await getImage(input);
     console.log(request);
     if (request) setArrayImage(request.hits);
   };
 
+  useEffect(() => {
+    fetchImage();
+  }, []);
+
   return (
     <div className="imageGeneratorContainer">
       <div className="imageGenerator">
-        <Form onSubmit={(e) => handleSubmit(e)}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Control
-              type="text"
-              placeholder="Search"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-            />
-          </Form.Group>
-
-          <div className="buttonDiv">
-            <Button variant="danger" onClick={(e) => setInput("")}>
-              Clear
-            </Button>
-            <Button variant="success" type="submit">
-              Submit
-            </Button>
-          </div>
-        </Form>
-
         <div className="imageContainer">
           {arrayImage.map((value, key) => (
             <Image image={value} key={key} />

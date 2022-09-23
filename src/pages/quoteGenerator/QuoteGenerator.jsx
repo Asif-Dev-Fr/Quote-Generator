@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getQuote } from "../../api/api";
 import Button from "react-bootstrap/Button";
 
-const QuoteGenerator = ({ input }) => {
+const QuoteGenerator = ({ input, choosenQuote }) => {
   const [quotesArray, setQuotesArray] = useState([]);
   const [loading, setLoading] = useState(false);
   const [quoteNumber, setQuoteNumber] = useState(0);
@@ -10,13 +10,16 @@ const QuoteGenerator = ({ input }) => {
   // Methods :
   const findQuote = async () => {
     let response = await getQuote();
-    console.log(input, "i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", !!response, !!input)
+    console.log(
+      input,
+      "i!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+      !!response,
+      !!input
+    );
     let tmpArray = [];
     if (response && input) {
-      console.log("first")
       setLoading(true);
       let capitalize = input.charAt(0).toUpperCase() + input.slice(1);
-      console.log(capitalize);
       let first = response.filter((quote) => quote.text.includes(capitalize));
       let second = response.filter((quote) => quote.text.includes(input));
       tmpArray = first.concat(second);
@@ -39,12 +42,16 @@ const QuoteGenerator = ({ input }) => {
   };
 
   const nextQuote = () => {
-    console.log(quoteNumber, quotesArray.length);
     if (quoteNumber + 1 !== quotesArray.length) {
       setQuoteNumber((prevNumber) => {
         return prevNumber + 1;
       });
     }
+  };
+
+  const handleSubmit = () => {
+    // console.log(quotesArray[quoteNumber]);
+    choosenQuote(quotesArray[quoteNumber])
   };
 
   return (
@@ -71,7 +78,7 @@ const QuoteGenerator = ({ input }) => {
         disabled={quoteNumber === 0}
         variant={"danger"}
       >
-        Precedent
+        Precedent quote
       </Button>
       <Button
         className="mb-3 col-lg-9 col-12"
@@ -79,8 +86,17 @@ const QuoteGenerator = ({ input }) => {
         disabled={quoteNumber + 1 === quotesArray.length}
         variant={"success"}
       >
-        Next
+        Next quote
       </Button>
+      <div>
+        <Button
+          className="mb-3 col-lg-9 col-12"
+          onClick={handleSubmit}
+          variant={"dark"}
+        >
+          Choose this quote
+        </Button>
+      </div>
     </div>
   );
 };
